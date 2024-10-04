@@ -1,49 +1,57 @@
-import sys
-sys.path.append('scripts')
-import scrape_tmdb
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, Response
 import pandas as pd
-import os
+from scripts.scrape_tmdb import fetch_data_from_api
+from scripts.visualize import plot_rating_distribution, plot_genre_avg_rating, plot_rating_by_genre
+
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'
+app.secret_key = 'your_secret_key'  # 這個 secret_key 是用來啟用 Flask 的閃現訊息功能
 
-# 網站首頁，顯示表單讓使用者輸入要抓取的頁數
+
 @app.route('/')
 def index():
     return render_template('index.html')
 
-# 處理表單提交並抓取數據
-@app.route('/fetch', methods=['POST'])
+@app.route('/fetch_data', methods=['POST'])
 def fetch_data():
-    pages = request.form.get('pages')
-    try:
-        pages = int(pages)
-        if pages <= 0:
-            flash("頁數必須大於 0", "error")
-            return redirect(url_for('index'))
-        
-        # 調用抓取數據的功能
-        scrape_tmdb.fetch_and_save_data(pages)
-        flash("資料抓取成功！", "success")
-        return redirect(url_for('index'))
-    except ValueError:
-        flash("請輸入有效的整數頁數", "error")
-        return redirect(url_for('index'))
-    except Exception as e:
-        flash(f"抓取資料時發生錯誤: {e}", "error")
-        return redirect(url_for('index'))
+    pages = int(request.form.get('pages'))
+    data = fetch_data_from_api(pages)
+    
+    # 將資料保存到 CSV 文件
+    data.to_csv('data/tmdb_popular_movies.csv', index=False)
+    
+    # 設定成功訊息
+    flash('資料抓取成功！', 'success')
 
-# 顯示抓取後的結果（你可以進一步擴展此功能來顯示具體數據）
-@app.route('/results')
-def results():
-    if os.path.exists('data/tmdb_popular_movies.csv'):
-        data = pd.read_csv('data/tmdb_popular_movies.csv')
-        return data.to_html()
+    return render_template('index.html', messages=[('success', f'資料抓取成功，共抓取了 {pages} 頁')])
+
+@app.route('/visualize_data', methods=['POST'])
+def visualize_data():
+    chart_type = request.form.get('chart_type')
+    data = pd.read_csv('data/tmdb_popular_movies.csv')
+
+    if chart_type == 'rating_distribution':
+        plot_url = plot_rating_distribution(data)
+    elif chart_type == 'genre_avg_rating':
+        plot_url = plot_genre_avg_rating(data)
+    elif chart_type == 'rating_by_genre':
+        plot_url = plot_rating_by_genre(data)
     else:
-        flash("尚未抓取任何資料", "error")
-        return redirect(url_for('index'))
+        plot_url = None
+
+    return render_template('index.html', plot_url=plot_url)
+
+@app.route('/view_data', methods=['GET'])
+def view_data():
+    # 讀取 CSV 文件
+    data = pd.read_csv('data/tmdb_popular_movies.csv')
+    
+    # 將 DataFrame 轉換為 HTML 表格
+    table_html = data.to_html(classes='table table-bordered table-striped', index=False)
+    
+    # 渲染表格並顯示
+    return render_template('view_data_table.html', table_html=table_html)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0',port=5001, debug=True)
 
