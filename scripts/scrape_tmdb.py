@@ -1,7 +1,8 @@
 import requests
 import pandas as pd
 
-API_KEY = '172c6a9faffa1091decf5ce31be741a3'  # 在 TMDb 註冊後獲得
+import os
+API_KEY = os.getenv('TMDB_API_KEY')
 BASE_URL = 'https://api.themoviedb.org/3'
 
 # 函數：抓取 TMDb 資料

@@ -1,15 +1,22 @@
-# Movie Ratings Analysis
+# TMDb Movie Ratings Analysis
 
-This project analyzes the IMDb Top 250 movies by scraping the IMDb website for movie ratings and titles. The data is cleaned, analyzed, and visualized to understand movie rating trends.
+This project allows users to scrape popular movie data from the TMDb API, analyze ratings, and visualize the results. The project is built using Flask for the web interface and `gunicorn` for local server management.
 
-## Project Structure
-- `data/`: Contains raw and cleaned datasets.
-- `scripts/`: Contains Python scripts for web scraping and data cleaning.
-- `notebooks/`: Jupyter Notebooks for data analysis and visualization.
-- `visualizations/`: Contains generated plots and graphs.
+## Table of Contents
 
-## How to Run
-1. Clone the repository.
-2. Run the web scraping script:
-   ```bash
-   python scripts/scrape_movies.py
+- [Installation](#installation)
+- [Usage](#usage)
+- [API Key Setup](#api-key-setup)
+- [Running the Application](#running-the-application)
+- [Features](#features)
+- [License](#license)
+
+## Installation
+
+### 1. Clone the repository
+
+To get started, clone the repository from GitHub:
+
+```bash
+git clone https://github.com/your-username/TMDbmovie-ratings-analysis.git
+cd TMDbmovie-ratings-analysis

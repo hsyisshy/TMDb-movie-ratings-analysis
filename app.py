@@ -1,7 +1,7 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
 import sys
 sys.path.append('scripts')
 import scrape_tmdb
+from flask import Flask, render_template, request, redirect, url_for, flash
 import pandas as pd
 import os
 
