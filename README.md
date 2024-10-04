@@ -18,5 +18,7 @@ This project allows users to scrape popular movie data from the TMDb API, analyz
 To get started, clone the repository from GitHub:
 
 ```bash
-git clone https://github.com/your-username/TMDbmovie-ratings-analysis.git
-cd TMDbmovie-ratings-analysis
+git clone https://github.com/hsyisshy/TMDb-movie-ratings-analysis.git
+cd TMDb-movie-ratings-analysis
+
+
