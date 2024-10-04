@@ -4,7 +4,7 @@ This project allows users to scrape popular movie data from the TMDb API, analyz
 
 ## Table of Contents
 
-- [Project Structure](#Project Structure)
+- [Project Structure](#project-structure)
 - [Installation](#installation)
 - [Usage](#usage)
 - [API Key Setup](#api-key-setup)
