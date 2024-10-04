@@ -4,12 +4,32 @@ This project allows users to scrape popular movie data from the TMDb API, analyz
 
 ## Table of Contents
 
+- [Project Structure](#Project Structure)
 - [Installation](#installation)
 - [Usage](#usage)
 - [API Key Setup](#api-key-setup)
 - [Running the Application](#running-the-application)
 - [Features](#features)
 - [License](#license)
+
+
+## Project Structure
+Here is an overview of the project's structure:
+```bash
+/TMDbmovie-ratings-analysis/
+├── data/
+    └── tmdb_popular_movies.csv       # The file where the scraped movie data is stored
+├── app.py                            # Main Flask application
+├── scripts/
+    └── scrape_tmdb.py                # Script to scrape data from TMDb API
+├── visualizations/                    # (Empty) Directory for saving visualizations (if implemented)
+├── requirements.txt                  # List of Python dependencies
+├── Procfile                          # Heroku deployment configuration (if needed)
+├── runtime.txt                       # Python runtime version (for Heroku)
+└── templates/
+    └── index.html                    # HTML template for the web interface
+```
+
 
 ## Installation
 
@@ -26,6 +46,7 @@ To keep dependencies isolated, it is recommended to create a virtual environment
 python3 -m venv venv
 source venv/bin/activate  # On Windows use `venv\Scripts\activate`
 ```
+
 
 ## Features
 - Movie Scraping: Fetches popular movies from the TMDb API based on the number of pages specified.
