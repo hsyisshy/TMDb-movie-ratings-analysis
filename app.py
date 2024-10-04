@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
-import scrape_tmdb  # 假設你已經有了 scrape_tmdb 的代碼
+import sys
+sys.path.append('scripts')
+import scrape_tmdb
 import pandas as pd
 import os
 
