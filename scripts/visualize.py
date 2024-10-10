@@ -6,6 +6,10 @@ import pandas as pd
 import io
 import base64
 
+# 確保 visualizations 資料夾存在
+if not os.path.exists('visualizations'):
+    os.makedirs('visualizations')
+
 def plot_rating_distribution(data):
     plt.figure(figsize=(20, 15))
     plt.hist(data['rating'], bins=20, color='blue', edgecolor='black')
@@ -43,7 +47,11 @@ def plot_rating_by_genre(data):
     return save_plot_to_base64(save_path)
 
 def save_plot_to_base64(save_path=None):
-    # 將圖表保存到 memory 中
+    # 將圖表保存到指定的資料夾中
+    if save_path:
+        plt.savefig(save_path)  # 儲存圖片到硬碟
+
+    # 將圖表保存到記憶體中
     buf = io.BytesIO()
     plt.savefig(buf, format='png')
     buf.seek(0)
