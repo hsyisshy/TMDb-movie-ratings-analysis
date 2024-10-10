@@ -7,13 +7,13 @@ import io
 import base64
 
 def plot_rating_distribution(data):
-    plt.figure(figsize=(20, 15))  # 調整圖表尺寸
+    plt.figure(figsize=(20, 15))
     plt.hist(data['rating'], bins=20, color='blue', edgecolor='black')
-    plt.title('Rating Distribution', fontsize=40)  # 調整標題字體
-    plt.xlabel('Rating', fontsize=30)  # 調整 X 軸標籤字體
-    plt.ylabel('Frequency', fontsize=30)  # 調整 Y 軸標籤字體
-    plt.xticks(fontsize=25)  # 調整 X 軸刻度字體
-    plt.yticks(fontsize=25)  # 調整 Y 軸刻度字體
+    plt.title('Rating Distribution', fontsize=40)
+    plt.xlabel('Rating', fontsize=30) 
+    plt.ylabel('Frequency', fontsize=30) 
+    plt.xticks(fontsize=25)  
+    plt.yticks(fontsize=25) 
 
     save_path = os.path.join('visualizations', 'rating_distribution.png')
     return save_plot_to_base64(save_path)
@@ -32,17 +32,15 @@ def plot_genre_avg_rating(data):
     return save_plot_to_base64(save_path)
 
 def plot_rating_by_genre(data):
-    plt.figure(figsize=(10, 10))  # 調整圖表尺寸
+    plt.figure(figsize=(10, 10))
     data.boxplot(column='rating', by='genre', grid=False)
-    plt.title('Rating by Genre', fontsize=24)  # 調整標題字體
-    plt.xlabel('Genre', fontsize=10)  # 調整 X 軸標籤字體
-    plt.ylabel('Rating', fontsize=10)  # 調整 Y 軸標籤字體
-    plt.yticks(fontsize=16)  # 調整 Y 軸刻度字體
+    plt.title('Rating by Genre', fontsize=24)
+    plt.xlabel('Genre', fontsize=10)
+    plt.ylabel('Rating', fontsize=10)
+    plt.yticks(fontsize=16)
 
     save_path = os.path.join('visualizations', 'rating_by_genre.png')
     return save_plot_to_base64(save_path)
-
-
 
 def save_plot_to_base64(save_path=None):
     # 將圖表保存到 memory 中

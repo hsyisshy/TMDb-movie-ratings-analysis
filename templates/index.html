@@ -6,12 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie Ratings Analysis</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background-color: #f8f9fa; /* Light grey background */
+        }
+        .container {
+            background-color: #ffffff; /* White background for content */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
 
 <body>
     <div class="container">
         <h1 class="text-center my-5">Movie Ratings Analysis</h1>
-
+            <div style="background-color: #e9ecef; padding: 10px; border-radius: 5px;">
+                <p>
+                    This web application leverages Python to fetch and visualize movie data using the free API provided by The Movie Database (TMDB). 
+                    By entering the number of pages to fetch, users can retrieve popular movie data, which is then stored in a CSV file. 
+                    Flask is used to build the simple web interface, allowing users to visualize the fetched data through different chart types
+                </p>
+            </div>
+        
         {% with messages = get_flashed_messages(with_categories=true) %}
           {% if messages %}
             <div class="alert alert-{{ messages[0][0] }}">
@@ -22,29 +41,26 @@
 
         <form action="{{ url_for('fetch_data') }}" method="post">
             <div class="form-group">
-                <label for="pages">請輸入要抓取的頁數：</label>
+                <label for="pages">Plz enter the pages you gonna fetch (1page = 20 movie data)：</label>
                 <input type="text" class="form-control" id="pages" name="pages" required>
             </div>
-            <button type="submit" class="btn btn-primary">抓取資料</button>
+            <button type="submit" class="btn btn-primary">Start Fetch data</button>
         </form>
 
-        <!-- 如果有抓取成功的訊息，顯示一個按鈕檢視資料 -->
-        {% if messages %}
-            <form action="{{ url_for('view_data') }}" method="get" class="mt-5">
-                <button type="submit" class="btn btn-secondary">檢視抓取到的資料</button>
-            </form>
-        {% endif %}
+        <form action="{{ url_for('view_data') }}" method="get" class="mt-5">
+                <button type="submit" class="btn btn-secondary">Check the data you fetched succesully</button>
+        </form>
         
         <form action="{{ url_for('visualize_data') }}" method="post" class="mt-5">
             <div class="form-group">
-                <label for="chart-type">請選擇要顯示的圖表：</label>
+                <label for="chart-type">Please choose the diagram you want：</label>
                 <select class="form-control" id="chart-type" name="chart_type" required>
                     <option value="rating_distribution">評分分布直方圖</option>
                     <option value="genre_avg_rating">類型平均評分條形圖</option>
                     <option value="rating_by_genre">評分與類型箱型圖</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary">顯示圖表</button>
+            <button type="submit" class="btn btn-primary">Show the diagram</button>
         </form>
 
         <div class="text-center mt-5">
