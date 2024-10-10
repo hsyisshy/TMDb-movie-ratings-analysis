@@ -27,8 +27,26 @@ Follow these steps to set up and run the project on your local machine:
    cd TMDbmovie-ratings-analysis
    ```
 2. **Clone the repository**:
+Install dependencies: Install the required Python packages using pip:
+   ```
+    pip install -r requirements.txt
+   ```
 
 3. **Clone the repository**:
+Create a .env file in the project root and add your TMDb API key:
+   ```
+    TMDB_API_KEY=your_tmdb_api_key
+   ```
+
+4. **Run the application**:
+You can run the Flask app locally using the following command:
+   ```
+    python app.py
+   ```
+
+5. **Access the application**: 
+Open your web browser and go to http://127.0.0.1:5001 to access the app.
+
 
 ## Project Structure
 Here's an overview of the project structure:
