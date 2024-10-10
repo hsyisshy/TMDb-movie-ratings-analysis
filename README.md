@@ -23,7 +23,7 @@ Follow these steps to set up and run the project on your local machine:
 
 1. **Clone the repository**:
    ```
-   git clone https://github.com/yourusername/TMDbmovie-ratings-analysis.git
+   git clone https://github.com/hsyisshy/TMDbmovie-ratings-analysis.git
    cd TMDbmovie-ratings-analysis
    ```
 2. **Clone the repository**:
